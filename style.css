@@ -1,0 +1,29 @@
+.modal-body {
+    color: black;
+  }
+
+  .card-img-top {
+    cursor: pointer;
+  }
+
+  .suggestions {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #ccc;
+    display: none;
+    color: white;
+    margin-top: 35px;
+  }
+
+  .suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .suggestion-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
