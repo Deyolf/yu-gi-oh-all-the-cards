@@ -13,25 +13,30 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) {
-   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-   res.end(JSON.stringify(Homepage));
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.write(Homepage);
+    res.end();
 });
-app.get('/:id', function (req, res) {
-   res.setHeader('Content-Type', 'application/json; charset=utf-8');
-   var users = DB_json;
-   var user = users[req.params.id]
-   res.end(JSON.stringify(user));
+
+app.get('/:html', function (req, res) {
+    res.setHeader('Content-Type', 'text/css');
+    let risorsa
+    fs.readFile(`${__dirname}/html/${req.params.html}.html`, 'utf8', function (err, data) {
+        risorsa = data
+    })
+    res.write(risorsa);
+    res.end();
 })
 app.post('/', function (req, res) {
-   res.setHeader('Content-Type', 'application/json; charset=utf-8');
-   var users = DB_json;
-   var user = req.body;
-   users[users.length] = user
-   res.end(JSON.stringify(users));
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    var users = DB_json;
+    var user = req.body;
+    users[users.length] = user
+    res.end(JSON.stringify(users));
 })
 var server = app.listen(port, hostname, () => {
-   console.log(`Express App running at http://${hostname}:${port}/`);
-   fs.readFile(`${__dirname}/html/home.html`, 'utf8', function (err, data) {
-      Homepage = data
-   })
+    console.log(`Express App running at http://${hostname}:${port}/`);
+    fs.readFile(`${__dirname}/html/home.html`, 'utf8', function (err, data) {
+        Homepage = data
+    })
 })
