@@ -14,13 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) {
    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-   let response = []
-   DB_json.forEach(famiglia => {
-      id_famiglia = famiglia.id_famiglia
-      id_compo = famiglia.id_compo
-      response.push({ id_famiglia, id_compo })
-   });
-   res.end(JSON.stringify(response));
+   res.end(JSON.stringify(Homepage));
 });
 app.get('/:id', function (req, res) {
    res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -38,6 +32,6 @@ app.post('/', function (req, res) {
 var server = app.listen(port, hostname, () => {
    console.log(`Express App running at http://${hostname}:${port}/`);
    fs.readFile(`${__dirname}/html/home.html`, 'utf8', function (err, data) {
-      Homepage = JSON.parse(data)
+      Homepage = data
    })
 })
