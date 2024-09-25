@@ -7,12 +7,22 @@
   <title>Carte Yu-Gi-Oh!</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    .modal-content {
+      background-color: #343a40; /* Colore scuro per il contenuto della modale */
+      color: white; /* Colore del testo bianco */
+    }
+
     .modal-body {
-      color: black;
+      display: flex; /* Utilizza Flexbox per affiancare l'immagine e le informazioni */
+      align-items: center; /* Allinea verticalmente */
     }
 
     .card-img-top {
       cursor: pointer;
+      width: 100%; /* Imposta la larghezza dell'immagine */
+      height: auto; /* Mantiene l'aspetto dell'immagine */
+      max-width: 300px; /* Limita la larghezza massima dell'immagine */
+      margin-right: 20px; /* Spazio tra l'immagine e le informazioni */
     }
 
     .suggestions {
@@ -36,6 +46,21 @@
     .suggestion-item:hover {
       background: rgba(255, 255, 255, 0.1);
     }
+
+    .blurred {
+      filter: blur(5px); /* Aggiungi l'effetto blur */
+      transition: filter 0.3s ease; /* Transizione per un effetto più fluido */
+    }
+
+    /* Styling per le carte */
+    .card {
+      background-color: #6c757d; /* Colore di sfondo della carta */
+      border: none; /* Rimuovi il bordo della carta */
+    }
+
+    .card-title {
+      color: #f8f9fa; /* Colore del titolo della carta */
+    }
   </style>
 </head>
 
@@ -51,7 +76,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Card List</a>
+            <a class="nav-link" href='home.html'>Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Deck</a>
@@ -99,19 +124,19 @@
     </nav>
   </div>
 
+  <!-- Modale singolo per mostrare dettagli e immagine -->
   <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="cardModalLabel">Dettagli della Carta</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
-        </div>
         <div class="modal-body">
-          <h3 id="modalCardName"></h3>
-          <p id="modalCardDescription"></p>
-          <p><strong>Tipo:</strong> <span id="modalCardType"></span></p>
-          <p><strong>Attacco:</strong> <span id="modalCardAttack"></span></p>
-          <p><strong>Difesa:</strong> <span id="modalCardDefense"></span></p>
+          <img id="modalImage" class="img-fluid card-img-top" alt="Card Image">
+          <div>
+            <h3 id="modalCardName"></h3>
+            <p id="modalCardDescription"></p>
+            <p><strong>Tipo:</strong> <span id="modalCardType"></span></p>
+            <p><strong>Attacco:</strong> <span id="modalCardAttack"></span></p>
+            <p><strong>Difesa:</strong> <span id="modalCardDefense"></span></p>
+          </div>
         </div>
       </div>
     </div>
@@ -144,14 +169,13 @@
       cardsToDisplay.forEach(card => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('col-lg-2', 'col-md-4', 'col-sm-6', 'mb-4');
-        cardElement.innerHTML = `
-          <div class="card bg-secondary text-light" style="width: 100%;">
+        cardElement.innerHTML =
+          `<div class="card" style="width: 100%;">
             <img src="${card.card_images[0].image_url}" class="card-img-top" alt="${card.name}" onclick="mostraDettagliCarta(${JSON.stringify(card).replace(/"/g, '&quot;')})" data-bs-toggle="modal" data-bs-target="#cardModal">
             <div class="card-body">
               <h5 class="card-title">${card.name}</h5>
             </div>
-          </div>
-        `;
+          </div>`;
         cardsContainer.appendChild(cardElement);
       });
     }
@@ -183,7 +207,7 @@
 
     function getDisplayedPages(currentPage, totalPages) {
       const displayedPages = [];
-      const range = 1; // Numero di pagine da visualizzare
+      const range = 2; // Numero di pagine da visualizzare
 
       for (let i = Math.max(1, currentPage - range); i <= Math.min(totalPages, currentPage + range); i++) {
         displayedPages.push(i);
@@ -260,11 +284,19 @@
     }
 
     function mostraDettagliCarta(card) {
+      // Mostra il modal con i dettagli della carta
       document.getElementById('modalCardName').innerText = card.name;
       document.getElementById('modalCardDescription').innerText = card.desc;
       document.getElementById('modalCardType').innerText = card.type;
       document.getElementById('modalCardAttack').innerText = card.atk || 'N/A';
       document.getElementById('modalCardDefense').innerText = card.def || 'N/A';
+
+      // Mostra l'immagine nel modal
+      document.getElementById('modalImage').src = card.card_images[0].image_url;
+
+      // Mostra il modal
+      const cardModal = new bootstrap.Modal(document.getElementById('cardModal'));
+      cardModal.show();
     }
 
     function showSuggestions() {
