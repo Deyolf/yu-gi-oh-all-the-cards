@@ -9,7 +9,11 @@ var DB_json
 
 var Homepage
 var yugioh
-var altro
+var cardfightvanguard
+var lordofhterings
+var magicthegathering
+var pokemon
+var dragonball
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());
@@ -25,6 +29,21 @@ app.get('/:html', function (req, res) {
     let risorsa
     if(req.params.html == "yugioh"){
         res.write(yugioh);
+    }
+    else if(req.params.html == "cardfightvanguard"){
+        res.write(cardfightvanguard);
+    }
+    else if(req.params.html == "lordoftherings"){
+        res.write(lordoftherings);
+    }
+    else if(req.params.html == "magicthegathering"){
+        res.write(magicthegathering);
+    }
+    else if(req.params.html == "pokemon"){
+        res.write(pokemon);
+    }
+    else if(req.params.html == "dragonball"){
+        res.write(dragonball);
     }
     res.end();
 })
@@ -42,5 +61,20 @@ var server = app.listen(port, hostname, () => {
     })
     fs.readFile(`${__dirname}/html/yugioh.html`, 'utf8', function (err, data) {
         yugioh = data
+    })
+    fs.readFile(`${__dirname}/html/dragonball.html`, 'utf8', function (err, data) {
+        dragonball = data
+    })
+    fs.readFile(`${__dirname}/html/lordoftherings.html`, 'utf8', function (err, data) {
+        lordoftherings = data
+    })
+    fs.readFile(`${__dirname}/html/pokemon.html`, 'utf8', function (err, data) {
+        pokemon = data
+    })
+    fs.readFile(`${__dirname}/html/cardfightvanguard.html`, 'utf8', function (err, data) {
+        cardfightvanguard = data
+    })
+    fs.readFile(`${__dirname}/html/magicthegathering.html`, 'utf8', function (err, data) {
+        magicthegathering = data
     })
 })
