@@ -7,26 +7,25 @@ var app = express();
 var fs = require("fs");
 var DB_json
 
+var Homepage
+var yugioh
+var altro
+
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    fs.readFile(`${__dirname}/html/home.html`, 'utf8', function (err, data) {
-        Homepage = data
-    })
-    res.write(Homepage);
-    res.end();
+    res.end(Homepage);
 });
 
 app.get('/:html', function (req, res) {
-    res.setHeader('Content-Type', 'text/css');
+    res.setHeader('Content-Type', 'text/html');
     let risorsa
-    fs.readFile(`${__dirname}/html/${req.params.html}.html`, 'utf8', function (err, data) {
-        risorsa = data
-    })
-    res.write(risorsa);
+    if(req.params.html == "yugioh"){
+        res.write(yugioh);
+    }
     res.end();
 })
 app.post('/', function (req, res) {
@@ -38,4 +37,10 @@ app.post('/', function (req, res) {
 })
 var server = app.listen(port, hostname, () => {
     console.log(`Express App running at http://${hostname}:${port}/`);
+    fs.readFile(`${__dirname}/html/home.html`, 'utf8', function (err, data) {
+        Homepage = data
+    })
+    fs.readFile(`${__dirname}/html/yugioh.html`, 'utf8', function (err, data) {
+        yugioh = data
+    })
 })
