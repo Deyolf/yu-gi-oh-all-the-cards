@@ -10,7 +10,7 @@ var DB_json
 var Homepage
 var yugioh
 var cardfightvanguard
-var lordofhterings
+var lordoftherings
 var magicthegathering
 var pokemon
 var dragonball
