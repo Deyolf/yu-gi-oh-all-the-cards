@@ -5,9 +5,10 @@ const port = 12000;
 var express = require('express');
 var app = express();
 var fs = require("fs");
+const path = require("path");
+app.use(express.static(path.join(__dirname, "static")));
 var DB_json
 
-var Homepage
 var yugioh
 var cardfightvanguard
 var lordoftherings
@@ -21,31 +22,71 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.end(Homepage);
+    res.status(200)
+
+    const filePath = path.join(__dirname, "static", "html/home.html");
+    res.write(fs.readFileSync(filePath, "utf-8"));
+
+    res.end();
 });
 
 app.get('/:html', function (req, res) {
     res.setHeader('Content-Type', 'text/html');
     let risorsa
-    if(req.params.html == "yugioh"){
-        res.write(yugioh);
+    if (req.params.html == "yugioh") {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.status(200)
+
+        const filePath = path.join(__dirname, "static", "html/yugioh.html");
+        res.write(fs.readFileSync(filePath, "utf-8"));
+
+        res.end();
     }
-    else if(req.params.html == "cardfightvanguard"){
-        res.write(cardfightvanguard);
+    else if (req.params.html == "cardfightvanguard") {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.status(200)
+
+        const filePath = path.join(__dirname, "static", "html/cardfightvanguard.html");
+        res.write(fs.readFileSync(filePath, "utf-8"));
+
+        res.end();
     }
-    else if(req.params.html == "lordoftherings"){
-        res.write(lordoftherings);
+    else if (req.params.html == "lordoftherings") {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.status(200)
+
+        const filePath = path.join(__dirname, "static", "html/lordoftherings.html");
+        res.write(fs.readFileSync(filePath, "utf-8"));
+
+        res.end();
     }
-    else if(req.params.html == "magicthegathering"){
-        res.write(magicthegathering);
+    else if (req.params.html == "magicthegathering") {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.status(200)
+
+        const filePath = path.join(__dirname, "static", "html/magicthegathering.html");
+        res.write(fs.readFileSync(filePath, "utf-8"));
+
+        res.end();
     }
-    else if(req.params.html == "pokemon"){
-        res.write(pokemon);
+    else if (req.params.html == "pokemon") {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.status(200)
+
+        const filePath = path.join(__dirname, "static", "html/pokemon.html");
+        res.write(fs.readFileSync(filePath, "utf-8"));
+
+        res.end();
     }
-    else if(req.params.html == "dragonball"){
-        res.write(dragonball);
+    else if (req.params.html == "dragonball") {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.status(200)
+
+        const filePath = path.join(__dirname, "static", "html/dragonball.html");
+        res.write(fs.readFileSync(filePath, "utf-8"));
+
+        res.end();
     }
-    res.end();
 })
 app.post('/', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -56,25 +97,4 @@ app.post('/', function (req, res) {
 })
 var server = app.listen(port, hostname, () => {
     console.log(`Express App running at http://${hostname}:${port}/`);
-    fs.readFile(`${__dirname}/html/home.html`, 'utf8', function (err, data) {
-        Homepage = data
-    })
-    fs.readFile(`${__dirname}/html/yugioh.html`, 'utf8', function (err, data) {
-        yugioh = data
-    })
-    fs.readFile(`${__dirname}/html/dragonball.html`, 'utf8', function (err, data) {
-        dragonball = data
-    })
-    fs.readFile(`${__dirname}/html/lordoftherings.html`, 'utf8', function (err, data) {
-        lordoftherings = data
-    })
-    fs.readFile(`${__dirname}/html/pokemon.html`, 'utf8', function (err, data) {
-        pokemon = data
-    })
-    fs.readFile(`${__dirname}/html/cardfightvanguard.html`, 'utf8', function (err, data) {
-        cardfightvanguard = data
-    })
-    fs.readFile(`${__dirname}/html/magicthegathering.html`, 'utf8', function (err, data) {
-        magicthegathering = data
-    })
 })

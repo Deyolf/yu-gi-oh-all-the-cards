@@ -1,29 +1,54 @@
+.modal-content {
+  background-color: #343a40; /* Colore scuro per il contenuto della modale */
+  color: white; /* Colore del testo bianco */
+}
+
 .modal-body {
-    color: black;
-  }
+  display: flex; /* Utilizza Flexbox per affiancare l'immagine e le informazioni */
+  align-items: center; /* Allinea verticalmente */
+}
 
-  .card-img-top {
-    cursor: pointer;
-  }
+.card-img-top {
+  cursor: pointer;
+  width: 100%; /* Imposta la larghezza dell'immagine */
+  height: auto; /* Mantiene l'aspetto dell'immagine */
+  max-width: 300px; /* Limita la larghezza massima dell'immagine */
+  margin-right: 20px; /* Spazio tra l'immagine e le informazioni */
+}
 
-  .suggestions {
-    position: absolute;
-    z-index: 1000;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid #ccc;
-    display: none;
-    color: white;
-    margin-top: 35px;
-  }
+.suggestions {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #ccc;
+  display: none;
+  color: white;
+  margin-top: 35px;
+}
 
-  .suggestion-item {
-    padding: 10px;
-    cursor: pointer;
-  }
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
 
-  .suggestion-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
+.suggestion-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.blurred {
+  filter: blur(5px); /* Aggiungi l'effetto blur */
+  transition: filter 0.3s ease; /* Transizione per un effetto più fluido */
+}
+
+/* Styling per le carte */
+.card {
+  background-color: #6c757d; /* Colore di sfondo della carta */
+  border: none; /* Rimuovi il bordo della carta */
+}
+
+.card-title {
+  color: #f8f9fa; /* Colore del titolo della carta */
+}
