@@ -9,13 +9,6 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "static")));
 var DB_json
 
-var yugioh
-var cardfightvanguard
-var lordoftherings
-var magicthegathering
-var pokemon
-var dragonball
-
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +25,6 @@ app.get('/', function (req, res) {
 
 app.get('/:html', function (req, res) {
     res.setHeader('Content-Type', 'text/html');
-    let risorsa
     if (req.params.html == "yugioh") {
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
         res.status(200)
