@@ -87,7 +87,18 @@ app.get('/api/pokemon', function (req, res) {
 })
 var server = app.listen(port, hostname, () => {
     fs.readFile(__dirname + "/apis/pokemon.json", 'utf8', function (err, data) {
+        let items = []
         Pokemon_Api = JSON.parse(data)
+        /* Pokemon_Api.forEach(card => {
+            fetch('https://api.tcgdex.net/v2/en/cards/' + card.id)
+                .then(response => response.json())
+                .then(data => {
+                    dataconvertita = JSON.parse(dataconvertita)
+                    item = { category: dataconvertita.category, id: dataconvertita.id, illustrator: dataconvertita.illustrator, image: dataconvertita.image, name:dataconvertita.name, rarity: dataconvertita.rarity }
+                    console.log(item)
+                })
+                .catch(error => console.error('Errore durante il recupero delle carte:', error));
+        }); */
     })
     console.log(`Express App running at http://${hostname}:${port}/`);
 })
