@@ -1,13 +1,13 @@
 const hostname = '127.0.0.1';
 const port = 12000;
 
-
 var express = require('express');
 var app = express();
 var fs = require("fs");
 const path = require("path");
 app.use(express.static(path.join(__dirname, "static")));
-var DB_json
+
+let Pokemon_Api
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());
@@ -80,13 +80,14 @@ app.get('/:html', function (req, res) {
         res.end();
     }
 })
-app.post('/', function (req, res) {
+app.get('/api/pokemon', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    var users = DB_json;
-    var user = req.body;
-    users[users.length] = user
-    res.end(JSON.stringify(users));
+    res.write(JSON.stringify(Pokemon_Api))
+    res.end()
 })
 var server = app.listen(port, hostname, () => {
+    fs.readFile(__dirname + "/apis/pokemon.json", 'utf8', function (err, data) {
+        Pokemon_Api = JSON.parse(data)
+    })
     console.log(`Express App running at http://${hostname}:${port}/`);
 })
