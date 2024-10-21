@@ -1,1 +1,90 @@
-pokemon
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carte Pokémon</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/yugioh.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" onclick="resetSearch()">Carte Pokémon</a>
+      <form class="d-flex position-relative" id="searchForm" onsubmit="searchCard(event)">
+        <input class="form-control me-2" type="search" placeholder="Cerca carta" aria-label="Search" id="searchInput"
+          oninput="showSuggestions()">
+        <button class="btn btn-outline-light" type="submit">Cerca</button>
+        <div id="suggestions" class="suggestions"></div>
+      </form>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href='/'>Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Deck</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container text-center mt-4">
+    <div class="row mb-3">
+      <div class="col-md-4 text-start">
+        <div class="form-group">
+          <label for="cardsPerPage">Carte per pagina:</label>
+          <select class="form-control" id="cardsPerPage" onchange="updateCardsPerPage()">
+            <option value="12" selected>12</option>
+            <option value="24">24</option>
+            <option value="36">36</option>
+            <option value="48">48</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 text-start">
+        <div class="form-group">
+          <label for="cardType">Tipo di Carta:</label>
+          <select class="form-control" id="cardType" onchange="filterCards()">
+            <option value="">Tutti</option>
+            <option value="Pokemon">Pokémon</option>
+            <option value="Trainer">Allenatore</option>
+            <option value="Energy">Energia</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div id="cards-container" class="row"></div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center mt-4" id="pagination"></ul>
+    </nav>
+  </div>
+
+  <!-- Modale singolo per mostrare dettagli e immagine -->
+  <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="modalImage" class="img-fluid card-img-top" alt="Card Image">
+                <div>
+                    <h3 id="modalCardName"></h3>
+                    <p><strong>Categoria:</strong> <span id="modalCardCategory"></span></p>
+                    <p><strong>Illustratore:</strong> <span id="modalCardType"></span></p>
+                    <p><strong>Set:</strong> <span id="modalCardSet"></span></p>
+                    <p><strong>HP:</strong> <span id="modalCardHP"></span></p>
+                    <p><strong>Tipi:</strong> <span id="modalCardTypes"></span></p>
+                    <p><strong>Debolezze:</strong> <span id="modalCardWeaknesses"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <script src="../script/pokemon.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
