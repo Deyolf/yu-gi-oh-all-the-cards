@@ -25,7 +25,7 @@
             <a class="nav-link" href='/'>Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Deck</a>
+            <a class="nav-link" href="./deck">Deck</a>
           </li>
         </ul>
       </div>
@@ -70,23 +70,38 @@
     </nav>
   </div>
 
-  <!-- Modale singolo per mostrare dettagli e immagine -->
   <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-          <img id="modalImage" class="img-fluid card-img-top" alt="Card Image">
-          <div>
-            <h3 id="modalCardName"></h3>
-            <p id="modalCardDescription"></p>
-            <p><strong>Tipo:</strong> <span id="modalCardType"></span></p>
-            <p><strong>Attacco:</strong> <span id="modalCardAttack"></span></p>
-            <p><strong>Difesa:</strong> <span id="modalCardDefense"></span></p>
-          </div>
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="modalImage" class="img-fluid card-img-top" alt="Card Image">
+                <div>
+                    <h3 id="modalCardName"></h3>
+                    <p id="modalCardDescription"></p>
+                    <p><strong>Tipo:</strong> <span id="modalCardType"></span></p>
+                    <p><strong>Attacco:</strong> <span id="modalCardAttack"></span></p>
+                    <p><strong>Difesa:</strong> <span id="modalCardDefense"></span></p>
+                    
+                    <div class="row">
+                        <div class="col-auto">
+                            <select class="form-control" id="Whichdeck" onchange="">
+                                <option value="">---------</option>
+                                <!-- Altre opzioni qui -->
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-control" id="WhichdeckSmall" onchange="">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
   <script src="../script/yugioh.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -52,3 +52,12 @@
 .card-title {
   color: #f8f9fa; /* Colore del titolo della carta */
 }
+
+#Whichdeck {
+  width: 130%; /* Larghezza del primo select */
+}
+
+#WhichdeckSmall {
+  width: 35px; /* Larghezza specifica per il secondo select */
+  height: auto; /* Puoi regolare l'altezza come necessario */
+}

@@ -79,6 +79,15 @@ app.get('/:html', function (req, res) {
 
         res.end();
     }
+    else if (req.params.html == "deck") {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.status(200)
+
+        const filePath = path.join(__dirname, "static", "html/deck.html");
+        res.write(fs.readFileSync(filePath, "utf-8"));
+
+        res.end();
+    }
 })
 app.get('/api/pokemon', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
